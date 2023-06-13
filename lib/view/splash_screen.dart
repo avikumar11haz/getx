@@ -16,7 +16,9 @@ class _SplashScreenState extends State<SplashScreen> {
       appBar: AppBar(
         title: Text('email_hint'.tr),
       ),
-      body: InternetExceptionWidget(onPress: () { },),
+      body: Column(
+        children: [],
+      ),
     );
   }
 }
