@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_mvvm/res/components/round_button.dart';
 import 'package:getx_mvvm/utils/Utils.dart';
-import 'package:getx_mvvm/view_models/controller/login_view_model.dart';
+import 'package:getx_mvvm/view_models/controller/login/login_view_model.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({Key? key}) : super(key: key);
@@ -15,6 +15,7 @@ class _LoginViewState extends State<LoginView> {
 
   final loginVM = Get.put(LoginViewModel());
   final _formkey = GlobalKey<FormState>();
+
 
   @override
   Widget build(BuildContext context) {
@@ -73,15 +74,16 @@ class _LoginViewState extends State<LoginView> {
             ),
 
            const SizedBox(height: 40,),
-            RoundButton(
-              width: 200,
+            Obx(() => RoundButton(
+                width: 200,
                 title: 'login'.tr,
+                loading: loginVM.loading.value,
                 onPress: (){
-                if(_formkey.currentState!.validate()){
-                  
+                  if(_formkey.currentState!.validate()){
+                    loginVM.loginApi();
+                  }
                 }
-                }
-            )
+            ))
           ],
         ),
       ),
